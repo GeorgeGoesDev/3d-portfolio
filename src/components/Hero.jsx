@@ -5,6 +5,21 @@ import { styles } from '../styles';
 import { ComputersCanvas } from './canvas';
 
 const Hero = () => {
+  const downloadPDF = () => {
+    // using Java Script method to get PDF file
+    fetch('src/assets/George_Koutanis_resume.pdf').then((response) => {
+      response.blob().then((blob) => {
+        // Creating new object of PDF file
+        const fileURL = window.URL.createObjectURL(blob);
+        // Setting various property values
+        let alink = document.createElement('a');
+        alink.href = fileURL;
+        alink.download = 'George_Koutanis_resume.pdf';
+        alink.click();
+      });
+    });
+  };
+
   return (
     <section className='relative w-full h-screen mx-auto'>
       <div
@@ -19,13 +34,23 @@ const Hero = () => {
             Hi, I'm <span className='text-[#915eff]'>George</span>
           </h1>
           <p className={`${styles.heroSubText} mt-2 text-white-100`}>
-            A fullstack Developer. Let's bring captivating{' '}
+            A Junior fullstack Developer. Let's bring captivating{' '}
             <br className='sm:block hidden' />
             experiences to life through coding
           </p>
         </div>
+
+        <div className='text-white absolute flex justify-center items-center inset-0'>
+          <div
+            className='bg-[#7433ff] hover:bg-[#915eff] text-white font-bold py-2 px-4 rounded cursor-pointer'
+            onClick={() => downloadPDF()}
+          >
+            Download My Resume
+          </div>
+        </div>
       </div>
       {/* <ComputersCanvas /> */}
+
       <div className='absolute xs:bottom-10 bottom-32 w-full flex justify-center items-center'>
         <a href='#about'>
           <div className='w-[35px] h-[64px] rounded-3xl border-4 border-secondary flex justify-center items-start p-2'>
