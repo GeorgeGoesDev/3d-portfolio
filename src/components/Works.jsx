@@ -17,32 +17,29 @@ const ProjectCard = ({
   link,
   source_code_link,
 }) => {
+  const handleClick = (link) => {
+    if (!link) return;
+    window.open(link, '_blank');
+  };
+
   return (
     <motion.div variants={fadeIn('up', 'spring', index * 0.5, 0.75)}>
       <Tilt
         options={{ max: 45, scale: 1, speed: 450 }}
         className='bg-tertiary p-5 rounded-2xl sm:w-[360px] w-full'
       >
-        <div className='relative w-full h-[230px]'>
+        <div
+          className='relative w-full h-[230px] cursor-pointer'
+          onClick={() => {
+            handleClick(link);
+          }}
+        >
           <img
             src={image}
             alt={name}
             className='w-full h-full object-cover rounded-2xl'
           />
           <div className='absolute inset-0 flex justify-end m-3 card-img_hover'>
-            {link && (
-              <div
-                onClick={() => window.open(link, '_blank')}
-                className='black-gradient w-10 h-10 rounded-full flex justify-center items-center cursor-pointer'
-              >
-                <img
-                  src={web}
-                  alt='website'
-                  className='w-2/3 h-2/3 object-contain'
-                />
-              </div>
-            )}
-
             {source_code_link && (
               <div
                 onClick={() => window.open(source_code_link, '_blank')}
