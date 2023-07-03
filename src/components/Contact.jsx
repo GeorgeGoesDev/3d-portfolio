@@ -1,7 +1,9 @@
 import { useState, useRef } from 'react';
 import { motion } from 'framer-motion';
 import emailjs from '@emailjs/browser';
-
+import toast from 'react-simple-toasts';
+import 'react-simple-toasts/dist/theme/success.css';
+import 'react-simple-toasts/dist/theme/failure.css';
 import { styles } from '../styles';
 import { EarthCanvas } from './canvas';
 import { SectionWrapper } from '../hoc';
@@ -15,8 +17,58 @@ const Contact = () => {
     message: '',
   });
   const [loading, setLoading] = useState(false);
-  const handleChange = (e) => {};
-  const handleSubmit = (e) => {};
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+
+    setForm({ ...form, [name]: value });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setLoading(true);
+    if (!form.name || !form.email || !form.message) {
+      setLoading(false);
+      toast('Please fill all the fields!', {
+        theme: 'failure',
+      });
+      return;
+    }
+    emailjs
+      .send(
+        'service_cibfvdi',
+        'template_mjyzs0g',
+        {
+          from_name: form.name,
+          to_name: 'George',
+          from_email: form.email,
+          to_email: 'g.koutanis@gmail.com',
+          message: form.message,
+        },
+        '2xuXCG-S33wUcGQp9'
+      )
+      .then(
+        () => {
+          setLoading(false);
+          toast('Thank you, I will get back to you as soon as possible!', {
+            theme: 'success',
+          });
+          setForm({
+            name: '',
+            email: '',
+            message: '',
+          });
+        },
+        (error) => {
+          setLoading(false);
+          console.log('====================================');
+          console.log(error);
+          console.log('====================================');
+          toast('Something went wrong, please try again!', {
+            theme: 'failure',
+          });
+        }
+      );
+  };
   return (
     <div className='xl:mt-12 xl:flex-row flex-col-reverse flex gap-10 overflow-hidden'>
       <motion.div
@@ -27,6 +79,7 @@ const Contact = () => {
         <h3 className={styles.sectionHeadText}>Contact.</h3>
         <form
           ref={formRef}
+          onChange={handleChange}
           onSubmit={handleSubmit}
           className='mt-12 flex flex-col gap-8'
         >
