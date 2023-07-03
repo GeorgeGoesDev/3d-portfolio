@@ -1,6 +1,7 @@
 import {
     mobile,
     backend,
+    theo,
     web,
     javascript,
     typescript,
@@ -171,7 +172,7 @@ const testimonials = [
         name: "Theo K.",
         designation: "DevOps Engineer",
         company: "TomTom",
-        image: "src/assets/theo.jpeg",
+        image: theo,
 
     },
 

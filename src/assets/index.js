@@ -29,9 +29,14 @@ import tesla from "./company/tesla.png";
 import HackTogether from "./HackTogether.png";
 import MemoryGame from "./MemoryGame.png";
 import OldPortfolio from "./OldPortfolio.png";
+import theo from "./theo.jpeg";
+
+import resume from './George_Koutanis_Resume.pdf'
 
 export {
   logo,
+  resume,
+  theo,
   backend,
   creator,
   mobile,

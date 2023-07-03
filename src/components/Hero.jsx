@@ -3,11 +3,12 @@ import { motion } from 'framer-motion';
 
 import { styles } from '../styles';
 import { ComputersCanvas } from './canvas';
+import { resume } from '../assets';
 
 const Hero = () => {
   const downloadPDF = () => {
     // using Java Script method to get PDF file
-    fetch('src/assets/George_Koutanis_resume.pdf').then((response) => {
+    fetch(resume).then((response) => {
       response.blob().then((blob) => {
         // Creating new object of PDF file
         const fileURL = window.URL.createObjectURL(blob);
